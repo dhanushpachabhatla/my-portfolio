@@ -17,8 +17,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Dev Portfolio",
-  description: "A modern developer portfolio built with Next.js",
+  title: "Pachabhatla Dhanush | Portfolio",
+  description: "Portfolio of Pachabhatla Dhanush, an AI & Full-Stack Engineer.",
 };
 
 export default function RootLayout({

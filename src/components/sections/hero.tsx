@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Twitter, Sparkles, MoveRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -15,9 +15,8 @@ export function Hero() {
         offset: ["start start", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
         <section
@@ -25,82 +24,123 @@ export function Hero() {
             ref={targetRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
         >
-            {/* Dynamic Background */}
-            <div className="absolute inset-0 w-full h-full bg-background">
-                <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] animate-float opacity-50" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-purple-500/10 blur-[100px] animate-float opacity-50" style={{ animationDelay: "2s" }} />
+            {/* Deep Dynamic Mesh Background */}
+            <div className="absolute inset-0 bg-[#030303]">
+                {/* Radial gradient for depth */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
+
+                {/* Animated glowing orbs */}
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3],
+                        rotate: [0, 90, 0]
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px] mix-blend-screen"
+                />
+                <motion.div
+                    animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.2, 0.4, 0.2],
+                        rotate: [0, -90, 0]
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute bottom-[-10%] left-[-10%] w-[700px] h-[700px] rounded-full bg-purple-600/10 blur-[130px] mix-blend-screen"
+                />
+
+                {/* Subtle grid pattern for texture */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
             </div>
 
-            <div className="container relative z-10 px-4 md:px-6">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-
+            <div className="container relative z-10 px-4 md:px-8">
+                <div className="grid lg:grid-cols-2 gap-16 items-center">
                     {/* Text Content */}
-                    <motion.div
-                        style={{ opacity, scale }}
-                        className="flex flex-col gap-6 order-2 lg:order-1"
-                    >
+                    <motion.div style={{ opacity }} className="flex flex-col gap-8 order-2 lg:order-1 pt-10 lg:pt-0">
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.5 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7, ease: "easeOut" }}
                             className="w-fit"
                         >
-                            <div className="px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium backdrop-blur-sm">
-                                Available for new opportunities
+                            <div className="group relative inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium backdrop-blur-md transition-all hover:bg-primary/10 cursor-default">
+                                <Sparkles className="h-4 w-4 animate-pulse text-primary" />
+                                <span>Available for new opportunities</span>
+                                {/* Subtle glowing border effect on hover */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/0 via-primary/30 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ maskImage: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)" }} />
                             </div>
                         </motion.div>
 
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 }}
-                            className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter"
-                        >
-                            Building <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500 animate-gradient-x">
-                                Digital Magic
-                            </span>
-                        </motion.h1>
+                        <div className="space-y-4">
+                            <motion.h1
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold leading-[1.05] tracking-tight text-foreground/90"
+                            >
+                                Crafting Digital <br />
+                                <span className="relative inline-block mt-2">
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-primary animate-gradient-x bg-[length:200%_auto]">
+                                        Masterpieces.
+                                    </span>
+                                </span>
+                            </motion.h1>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
-                            className="max-w-[600px] text-lg text-muted-foreground sm:text-xl leading-relaxed"
-                        >
-                            I&apos;m a Full Stack Developer who bridges the gap between chaos and code.
-                            I craft pixel-perfect, accessible, and performant web experiences.
-                        </motion.p>
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+                                className="max-w-[550px] text-lg sm:text-xl text-muted-foreground/90 leading-relaxed font-light"
+                            >
+                                I&apos;m Pachabhatla Dhanush, a motivated developer with growing expertise in NLP, Generative AI, Deep Learning, and Agentic AI systems alongside Full Stack development.
+                            </motion.p>
+                        </div>
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                            className="flex flex-wrap gap-4 pt-4"
+                            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+                            className="flex flex-wrap gap-5 pt-2"
                         >
-                            <Button asChild size="lg" className="rounded-full h-14 px-8 text-base bg-primary hover:bg-primary/90 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all hover:scale-105 active:scale-95 group">
+                            <Button asChild size="lg" className="relative group overflow-hidden rounded-full h-14 px-8 text-base bg-primary text-primary-foreground font-semibold shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95">
                                 <Link href="#projects">
-                                    View My Work <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        View Projects <MoveRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                                    </span>
+                                    {/* Button swipe effect */}
+                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
                                 </Link>
                             </Button>
-                            <Button asChild variant="outline" size="lg" className="rounded-full h-14 px-8 text-base border-white/10 glass hover:bg-white/10 transition-all hover:scale-105 active:scale-95">
-                                <Link href="#contact">Contact Me</Link>
+
+                            <Button asChild variant="outline" size="lg" className="rounded-full h-14 px-8 text-base font-medium border-border/50 bg-background/30 backdrop-blur-sm hover:bg-white/5 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground">
+                                <Link href="#contact">Let&apos;s Connect</Link>
                             </Button>
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.4 }}
-                            className="flex gap-6 pt-8 items-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                            className="flex gap-6 mt-6 items-center"
                         >
-                            <SocialLink href="https://github.com" icon={<Github className="h-6 w-6" />} />
-                            <SocialLink href="https://linkedin.com" icon={<Linkedin className="h-6 w-6" />} />
-                            <SocialLink href="mailto:hello@example.com" icon={<Mail className="h-6 w-6" />} />
+                            {[
+                                { icon: <Github className="h-5 w-5" />, href: "https://github.com/dhanushpachabhatla" },
+                                { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/dhanushpachabhatla/" },
+                                { icon: <Mail className="h-5 w-5" />, href: "mailto:pachabhatladhanush@gmail.com" },
+                            ].map((social, idx) => (
+                                <Link
+                                    key={idx}
+                                    href={social.href}
+                                    target="_blank"
+                                    className="p-3 rounded-full bg-white/[0.03] border border-white/[0.05] hover:bg-primary/10 hover:border-primary/30 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_15px_rgba(var(--primary),0.2)]"
+                                >
+                                    {social.icon}
+                                </Link>
+                            ))}
                         </motion.div>
                     </motion.div>
 
-                    {/* Photo / Visual */}
+                    {/* Highly stylized visual/photo */}
                     <motion.div
                         style={{ y }}
                         className="order-1 lg:order-2 flex justify-center lg:justify-end relative"
@@ -108,70 +148,95 @@ export function Hero() {
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
                             animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                            transition={{ duration: 0.8, ease: "backOut" }}
-                            className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[450px] lg:h-[450px]"
+                            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] group"
                         >
-                            {/* Creative Frame Elements */}
-                            <div className="absolute inset-0 border-2 border-primary/30 rounded-[2rem] rotate-6 scale-105 z-0" />
-                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-purple-500/20 rounded-[2rem] -rotate-3 scale-105 blur-xl z-0" />
+                            {/* Layered decorative borders for depth */}
+                            <div className="absolute inset-0 border border-primary/20 rounded-[2.5rem] rotate-6 scale-[1.02] transition-transform duration-700 group-hover:rotate-12 group-hover:scale-105" />
+                            <div className="absolute inset-0 border border-purple-500/20 rounded-[2.5rem] -rotate-3 scale-[1.05] transition-transform duration-700 group-hover:-rotate-6 group-hover:scale-110" />
 
-                            {/* Photo Container */}
-                            <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-white/10 glass-card shadow-2xl z-10 group">
+                            {/* Glowing backdrop */}
+                            <div className="absolute inset-2 bg-gradient-to-tr from-primary/30 to-purple-500/30 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-700" />
+
+                            {/* Main photo container */}
+                            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 bg-background/50 backdrop-blur-sm shadow-2xl z-10 transition-transform duration-700 group-hover:-translate-y-2 group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
                                 <Image
                                     src="/dhanush_photo.jpg"
                                     alt="Dhanush"
                                     fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0"
                                     priority
                                 />
-                                {/* Overlay Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                                    <p className="text-white font-medium">Hello, I&apos;m Dhanush!</p>
+                                {/* Bottom gradient for text focus */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                                    <p className="text-white font-heading font-semibold text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Pachabhatla Dhanush</p>
+                                    <p className="text-white/70 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">AI & Full Stack Engineer</p>
                                 </div>
                             </div>
 
-                            {/* Floating Elements */}
-                            <FloatingBadge delay={0.5} className="absolute -top-6 -right-6 z-20 bg-background/80 backdrop-blur-md border border-white/10 p-3 rounded-xl shadow-xl">
-                                <span className="text-2xl">🚀</span>
+                            {/* Floating stylized badges */}
+                            <FloatingBadge delay={0.5} className="absolute -top-4 -right-4 z-20">
+                                <div className="bg-background/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+                                    <CodeIcon />
+                                </div>
                             </FloatingBadge>
-                            <FloatingBadge delay={1} className="absolute -bottom-8 -left-8 z-20 bg-background/80 backdrop-blur-md border border-white/10 p-3 rounded-xl shadow-xl">
-                                <span className="text-2xl">⚡</span>
+
+                            <FloatingBadge delay={1.2} className="absolute -bottom-8 -left-4 z-20">
+                                <div className="bg-background/90 backdrop-blur-xl border border-white/10 p-4 rounded-2xl shadow-2xl flex items-center gap-3 relative overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-transparent" />
+                                    <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                                    <span className="text-sm font-medium text-foreground/80 relative z-10">Available</span>
+                                </div>
                             </FloatingBadge>
                         </motion.div>
                     </motion.div>
-
                 </div>
             </div>
-        </section>
-    );
-}
 
-function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
-    return (
-        <Link
-            href={href}
-            target="_blank"
-            className="p-3 rounded-full bg-white/5 border border-white/5 hover:bg-primary/20 hover:border-primary/50 text-muted-foreground hover:text-primary transition-all duration-300 hover:-translate-y-1"
-        >
-            {icon}
-        </Link>
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
+            >
+                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground/50">Scroll</span>
+                <div className="w-[1px] h-12 bg-gradient-to-b from-muted-foreground/50 to-transparent relative overflow-hidden">
+                    <motion.div
+                        animate={{ y: [0, 48] }}
+                        transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                        className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent via-primary to-transparent"
+                    />
+                </div>
+            </motion.div>
+        </section>
     );
 }
 
 function FloatingBadge({ children, className, delay }: { children: React.ReactNode; className?: string; delay: number }) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay }}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", duration: 0.8, delay }}
             className={className}
         >
             <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, delay: delay * 0.5, repeat: Infinity, ease: "easeInOut" }}
             >
                 {children}
             </motion.div>
         </motion.div>
     );
+}
+
+function CodeIcon() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary relative z-10">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+    )
 }
