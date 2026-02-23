@@ -40,7 +40,7 @@ export function ContactSection() {
                                 { icon: <Phone className="h-6 w-6" />, title: "Phone", value: "+91 9392 588 734", link: "tel:+919392588734" }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-6 group">
-                                    <div className="w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center text-primary group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(var(--primary),0.2)]">
+                                    <div className="w-14 h-14 rounded-2xl bg-background border border-border/40 flex items-center justify-center text-primary group-hover:bg-primary/10 group-hover:border-primary/20 group-hover:scale-110 transition-all duration-300 shadow-sm group-hover:shadow-md">
                                         {item.icon}
                                     </div>
                                     <div>
@@ -61,8 +61,8 @@ export function ContactSection() {
                     {/* Right: Form */}
                     <ScrollAnimation delay={0.4}>
                         <div className="relative group">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-purple-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="relative rounded-3xl bg-card/40 backdrop-blur-xl border border-white/10 p-8 shadow-2xl">
+                            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-purple-500/20 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition-opacity duration-500" />
+                            <div className="relative rounded-3xl bg-card/60 backdrop-blur-xl border border-border/40 p-8 shadow-xl">
                                 <ContactForm />
                             </div>
                         </div>

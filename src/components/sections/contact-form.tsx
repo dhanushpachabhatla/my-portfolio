@@ -51,8 +51,8 @@ export function ContactForm() {
                 </label>
                 <div className="relative group">
                     <div className={cn(
-                        "absolute -inset-0.5 rounded-xl blur opacity-0 transition duration-500",
-                        focusedField === "message" ? "opacity-30 bg-primary" : "group-hover:opacity-10 bg-white/20"
+                        "absolute -inset-0.5 rounded-xl blur opacity-0 transition duration-500 bg-primary",
+                        focusedField === "message" ? "opacity-20" : "group-hover:opacity-10"
                     )} />
                     <textarea
                         id="message"
@@ -60,31 +60,38 @@ export function ContactForm() {
                         placeholder="Tell me about your project..."
                         onFocus={() => setFocusedField("message")}
                         onBlur={() => setFocusedField(null)}
-                        className="relative w-full min-h-[160px] bg-background/50 backdrop-blur-sm border border-white/10 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-0 resize-none transition-colors"
+                        className="relative w-full min-h-[160px] bg-background/50 backdrop-blur-sm border border-border/40 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 resize-none transition-all shadow-sm"
                     />
                 </div>
             </div>
 
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="pt-2">
-                <Button
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="pt-4 flex w-full">
+                <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-14 rounded-xl text-base font-semibold bg-primary hover:bg-primary text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all duration-300 relative overflow-hidden group"
+                    className="relative group w-full overflow-hidden rounded-xl h-14 p-[1.5px] text-base font-semibold transition-all duration-300 shadow-[0_0_20px_rgba(var(--primary),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary),0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                        {isSubmitting ? (
-                            <>
-                                <Loader2 className="h-5 w-5 animate-spin" />
-                                Sending...
-                            </>
-                        ) : (
-                            <>
-                                Send Message <Send className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </>
-                        )}
+                    {/* Rotating border effect */}
+                    {!isSubmitting && (
+                        <span className="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,hsl(var(--primary))_50%,transparent_100%)] animate-[spin_2s_linear_infinite]" />
+                    )}
+
+                    {/* Inner content container */}
+                    <span className="relative flex items-center justify-center h-full w-full bg-background rounded-[10px] px-8 transition-colors duration-300 group-hover:bg-primary/10">
+                        <span className="flex items-center justify-center gap-2 text-foreground group-hover:text-primary-foreground transition-colors">
+                            {isSubmitting ? (
+                                <>
+                                    <Loader2 className="h-5 w-5 animate-spin" />
+                                    Sending...
+                                </>
+                            ) : (
+                                <>
+                                    Send Message <Send className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </>
+                            )}
+                        </span>
                     </span>
-                </Button>
+                </button>
             </motion.div>
         </form>
     );
@@ -103,8 +110,8 @@ function InputGroup({
             </label>
             <div className="relative group">
                 <div className={cn(
-                    "absolute -inset-0.5 rounded-xl blur opacity-0 transition duration-500",
-                    isFocused ? "opacity-30 bg-primary" : "group-hover:opacity-10 bg-white/20"
+                    "absolute -inset-0.5 rounded-xl blur opacity-0 transition duration-500 bg-primary",
+                    isFocused ? "opacity-20" : "group-hover:opacity-10"
                 )} />
                 <input
                     id={id}
@@ -113,7 +120,7 @@ function InputGroup({
                     placeholder={placeholder}
                     onFocus={onFocus}
                     onBlur={onBlur}
-                    className="relative w-full h-12 bg-background/50 backdrop-blur-sm border border-white/10 rounded-xl px-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-0 transition-colors"
+                    className="relative w-full h-12 bg-background/50 backdrop-blur-sm border border-border/40 rounded-xl px-4 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-primary/50 transition-all shadow-sm"
                 />
             </div>
         </div>

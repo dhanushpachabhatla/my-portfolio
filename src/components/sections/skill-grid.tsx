@@ -30,21 +30,21 @@ export function SkillGrid() {
                     viewport={{ once: true, margin: "-50px" }}
                     className="group relative"
                 >
-                    {/* Glowing Backdrop */}
+                    {/* Glowing Backdrop (Reduced) */}
                     <div className={cn(
-                        "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl",
+                        "absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl",
                         item.color
                     )} />
 
                     {/* Card container */}
-                    <div className="relative h-full flex flex-col justify-between p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] group-hover:border-white/[0.1] group-hover:bg-white/[0.04] transition-all duration-300 overflow-hidden backdrop-blur-sm">
+                    <div className="relative h-full flex flex-col justify-between p-5 rounded-2xl bg-card border border-border/40 group-hover:border-primary/20 group-hover:bg-card/80 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md">
                         {/* Top layout */}
                         <div className="flex items-center justify-between mb-4">
-                            <span className="font-heading font-medium tracking-wide text-foreground/90 group-hover:text-white transition-colors duration-300">
+                            <span className="font-heading font-medium tracking-wide text-foreground/90 group-hover:text-primary transition-colors duration-300">
                                 {item.name}
                             </span>
                             {/* Color Dot indicator */}
-                            <div className={cn("w-2 h-2 rounded-full", item.color, "opacity-50 group-hover:opacity-100 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-300", item.shadow)} />
+                            <div className={cn("w-2 h-2 rounded-full", item.color, "opacity-70 group-hover:opacity-100 transition-all duration-300", item.shadow)} />
                         </div>
 
                         {/* Animated progress bar */}

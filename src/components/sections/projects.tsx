@@ -17,7 +17,7 @@ const projects = [
         demo: "#",
         color: "from-purple-500/20 to-indigo-500/20",
         border: "group-hover:border-indigo-500/50",
-        glow: "group-hover:shadow-[0_0_40px_-10px_rgba(99,102,241,0.5)]",
+        glow: "group-hover:shadow-[0_0_20px_-10px_rgba(99,102,241,0.3)]",
         size: "md:col-span-2 lg:col-span-2 row-span-2",
         featured: true,
     },
@@ -29,7 +29,7 @@ const projects = [
         demo: "#",
         color: "from-blue-500/20 to-cyan-500/20",
         border: "group-hover:border-cyan-500/50",
-        glow: "group-hover:shadow-[0_0_40px_-10px_rgba(6,182,212,0.5)]",
+        glow: "group-hover:shadow-[0_0_20px_-10px_rgba(6,182,212,0.3)]",
         size: "md:col-span-1 lg:col-span-1",
     },
     {
@@ -40,7 +40,7 @@ const projects = [
         demo: "#",
         color: "from-emerald-500/20 to-teal-500/20",
         border: "group-hover:border-teal-500/50",
-        glow: "group-hover:shadow-[0_0_40px_-10px_rgba(20,184,166,0.5)]",
+        glow: "group-hover:shadow-[0_0_20px_-10px_rgba(20,184,166,0.3)]",
         size: "md:col-span-1 lg:col-span-1",
     },
     {
@@ -51,7 +51,7 @@ const projects = [
         demo: "#",
         color: "from-orange-500/20 to-rose-500/20",
         border: "group-hover:border-rose-500/50",
-        glow: "group-hover:shadow-[0_0_40px_-10px_rgba(244,63,94,0.5)]",
+        glow: "group-hover:shadow-[0_0_20px_-10px_rgba(244,63,94,0.3)]",
         size: "md:col-span-2 lg:col-span-2",
     },
 ];
@@ -140,7 +140,7 @@ function TiltCard({ project, index }: { project: any; index: number }) {
                 {/* Inner Card */}
                 <div
                     style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
-                    className="relative h-full rounded-[23px] bg-card/40 backdrop-blur-xl border border-white/5 p-8 flex flex-col overflow-hidden transition-colors duration-500 group-hover:bg-card/60"
+                    className="relative h-full rounded-[23px] bg-card/60 backdrop-blur-xl border border-border/40 p-8 flex flex-col overflow-hidden transition-colors duration-500 group-hover:bg-card/80 shadow-sm"
                 >
                     {/* Corner Accent */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -163,21 +163,25 @@ function TiltCard({ project, index }: { project: any; index: number }) {
                     {/* Tech Stack Tags */}
                     <div style={{ transform: "translateZ(30px)" }} className="flex flex-wrap gap-2 mt-auto pt-4">
                         {project.tags.map((tag: string) => (
-                            <span key={tag} className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.05] text-xs font-medium text-muted-foreground group-hover:border-white/[0.1] transition-colors">
+                            <span key={tag} className="px-3 py-1 rounded-full bg-background border border-border/40 text-xs font-medium text-muted-foreground group-hover:border-primary/20 transition-colors shadow-sm">
                                 {tag}
                             </span>
                         ))}
                     </div>
 
                     {/* Action Buttons */}
-                    <div style={{ transform: "translateZ(50px)" }} className="absolute bottom-8 right-8 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        <Link href={project.github} className="p-3 rounded-full bg-background/50 backdrop-blur-md border border-white/10 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all shadow-xl">
-                            <Github className="h-4 w-4" />
-                            <span className="sr-only">GitHub</span>
+                    <div style={{ transform: "translateZ(50px)" }} className="absolute bottom-6 right-6 flex flex-col sm:flex-row gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                        <Link href={project.github} className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
+                            <span className="relative z-10 flex items-center gap-2">
+                                <Github className="h-4 w-4" /> Code
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
                         </Link>
-                        <Link href={project.demo} className="p-3 rounded-full bg-background/50 backdrop-blur-md border border-white/10 text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all shadow-xl">
-                            <ExternalLink className="h-4 w-4" />
-                            <span className="sr-only">Live Demo</span>
+                        <Link href={project.demo} className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
+                            <span className="relative z-10 flex items-center gap-2">
+                                <ExternalLink className="h-4 w-4" /> Demo
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
                         </Link>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Manrope, Outfit } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import clsx from "clsx";
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={clsx(
-          outfit.variable,
+          spaceGrotesk.variable,
           manrope.variable,
           "font-body bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground"
         )}

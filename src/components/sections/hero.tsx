@@ -1,11 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Mail, Twitter, Sparkles, MoveRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
@@ -18,14 +18,41 @@ export function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+    // Smooth Cursor Tracking
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const smoothMouseX = useSpring(mouseX, { damping: 50, stiffness: 400 });
+    const smoothMouseY = useSpring(mouseY, { damping: 50, stiffness: 400 });
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseX.set(e.clientX);
+            mouseY.set(e.clientY);
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [mouseX, mouseY]);
+
     return (
         <section
             id="hero"
             ref={targetRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
         >
+            {/* Smooth Cursor Glow */}
+            <motion.div
+                className="pointer-events-none fixed top-0 left-0 w-[250px] h-[250px] bg-primary/20 rounded-full blur-[80px] mix-blend-screen z-0"
+                style={{
+                    x: smoothMouseX,
+                    y: smoothMouseY,
+                    translateX: "-50%",
+                    translateY: "-50%",
+                }}
+            />
+
             {/* Deep Dynamic Mesh Background */}
-            <div className="absolute inset-0 bg-[#030303]">
+            <div className="absolute inset-0 bg-background">
                 {/* Radial gradient for depth */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
 
@@ -56,7 +83,7 @@ export function Hero() {
             <div className="container relative z-10 px-4 md:px-8">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
                     {/* Text Content */}
-                    <motion.div style={{ opacity }} className="flex flex-col gap-8 order-2 lg:order-1 pt-10 lg:pt-0">
+                    <motion.div style={{ opacity }} className="flex flex-col items-center lg:items-start text-center lg:text-left gap-8 order-2 lg:order-1 pt-10 lg:pt-0">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -100,28 +127,34 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-                            className="flex flex-wrap gap-5 pt-2"
+                            className="flex flex-wrap justify-center lg:justify-start gap-5 pt-2 relative z-20"
                         >
-                            <Button asChild size="lg" className="relative group overflow-hidden rounded-full h-14 px-8 text-base bg-primary text-primary-foreground font-semibold shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_30px_rgba(var(--primary),0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-95">
-                                <Link href="#projects">
-                                    <span className="relative z-10 flex items-center gap-2">
+                            <Link href="#projects" className="relative group overflow-hidden rounded-full h-14 p-[1.5px] text-base font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(var(--primary),0.2)] hover:shadow-[0_0_30px_rgba(var(--primary),0.4)] flex items-center">
+                                {/* Rotating border effect */}
+                                <span className="absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,hsl(var(--primary))_50%,transparent_100%)] animate-[spin_2s_linear_infinite]" />
+
+                                {/* Inner content container */}
+                                <span className="relative flex items-center justify-center h-full w-full rounded-full bg-background px-8 transition-colors duration-300 group-hover:bg-primary/10">
+                                    <span className="flex items-center gap-2 text-foreground group-hover:text-primary-foreground transition-colors">
                                         View Projects <MoveRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                     </span>
-                                    {/* Button swipe effect */}
-                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out z-0" />
-                                </Link>
-                            </Button>
+                                </span>
+                            </Link>
 
-                            <Button asChild variant="outline" size="lg" className="rounded-full h-14 px-8 text-base font-medium border-border/50 bg-background/30 backdrop-blur-sm hover:bg-white/5 hover:border-primary/50 transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground">
-                                <Link href="#contact">Let&apos;s Connect</Link>
-                            </Button>
+                            <Link href="#contact" className="relative group overflow-hidden rounded-full h-14 px-8 text-base font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center hover:border-primary/50 hover:bg-white/[0.05]">
+                                <span className="relative z-10 flex items-center gap-2">
+                                    Let&apos;s Connect
+                                </span>
+                                {/* Hover sweep effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
+                            </Link>
                         </motion.div>
 
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 1, delay: 0.5 }}
-                            className="flex gap-6 mt-6 items-center"
+                            className="flex justify-center lg:justify-start gap-6 mt-6 items-center w-full"
                         >
                             {[
                                 { icon: <Github className="h-5 w-5" />, href: "https://github.com/dhanushpachabhatla" },
@@ -143,7 +176,7 @@ export function Hero() {
                     {/* Highly stylized visual/photo */}
                     <motion.div
                         style={{ y }}
-                        className="order-1 lg:order-2 flex justify-center lg:justify-end relative"
+                        className="order-1 lg:order-2 flex justify-center lg:justify-end relative mt-10 lg:mt-0"
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
