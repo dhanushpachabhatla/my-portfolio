@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Github, Linkedin, Mail, Twitter, Sparkles, MoveRight } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Mail, Twitter, Sparkles, MoveRight, FileText } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -147,6 +147,14 @@ export function Hero() {
                                 </span>
                                 {/* Hover sweep effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
+                            </Link>
+
+                            <Link href="/pachabhatla_dhanush_resume.pdf" target="_blank" className="relative group overflow-hidden rounded-full h-14 px-8 text-base font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center hover:border-purple-500/50 hover:bg-white/[0.05]">
+                                <span className="relative z-10 flex items-center gap-2">
+                                    <FileText className="h-4 w-4" /> Resume
+                                </span>
+                                {/* Hover sweep effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
                             </Link>
                         </motion.div>
 

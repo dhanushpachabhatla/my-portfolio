@@ -13,7 +13,7 @@ const projects = [
         title: "Conditional Molecule Generation",
         description: "A GAN-based molecular generation framework supporting both conditional and unconditional molecule synthesis using SMILES, trained on a large-scale dataset of 500,000+ molecules.",
         tags: ["PyTorch", "GANs", "Transformers", "RDKit"],
-        github: "https://github.com/dhanushpachabhatla",
+        github: "https://github.com/dhanushpachabhatla/conditional-molecule-generation-using-Transformer-GAN-with-RL",
         demo: "#",
         color: "from-purple-500/20 to-indigo-500/20",
         border: "group-hover:border-indigo-500/50",
@@ -25,7 +25,7 @@ const projects = [
         title: "Agentic Clinical DSS",
         description: "An end-to-end AI system converting unstructured medical reports into structured clinical knowledge using an agentic RAG architecture and entity-centric embeddings.",
         tags: ["NLP", "Pinecone", "LLMs"],
-        github: "https://github.com/dhanushpachabhatla",
+        github: "https://github.com/dhanushpachabhatla/Agentic-Clinical-Decision-Support-System",
         demo: "#",
         color: "from-blue-500/20 to-cyan-500/20",
         border: "group-hover:border-cyan-500/50",
@@ -36,7 +36,7 @@ const projects = [
         title: "Agentic Startup Assistant",
         description: "Autonomous multi-agent research assistant utilizing tool-using LLM agents to analyze startups, markets, and funding trends through structured planning.",
         tags: ["LangChain", "Multi-Agent"],
-        github: "https://github.com/dhanushpachabhatla",
+        github: "https://github.com/dhanushpachabhatla/Agentic-Startup-Research-Assistant",
         demo: "#",
         color: "from-emerald-500/20 to-teal-500/20",
         border: "group-hover:border-teal-500/50",
@@ -47,13 +47,25 @@ const projects = [
         title: "DeepFake Video Detection",
         description: "A robust DeepFake detection system built with a CNN-BiLSTM architecture (ResNet-50 and temporal modeling), achieving 91.26% validation accuracy.",
         tags: ["PyTorch", "ResNet-50", "BiLSTM"],
-        github: "https://github.com/dhanushpachabhatla",
+        github: "https://github.com/dhanushpachabhatla/deepfake_video_detection_project",
         demo: "#",
         color: "from-orange-500/20 to-rose-500/20",
         border: "group-hover:border-rose-500/50",
         glow: "group-hover:shadow-[0_0_20px_-10px_rgba(244,63,94,0.3)]",
         size: "md:col-span-2 lg:col-span-2",
     },
+    {
+        title: "GitHub Repositories",
+        description: "Explore my complete portfolio of open-source contributions, experimental projects, and algorithmic problem-solving directly on my GitHub profile.",
+        tags: ["Open Source", "Contributions"],
+        github: "https://github.com/dhanushpachabhatla",
+        demo: "https://github.com/dhanushpachabhatla",
+        color: "from-slate-500/20 to-gray-500/20",
+        border: "group-hover:border-gray-400/50",
+        glow: "group-hover:shadow-[0_0_20px_-10px_rgba(255,255,255,0.2)]",
+        size: "md:col-span-1 lg:col-span-1",
+        isGitHubProfile: true,
+    }
 ];
 
 export function ProjectsSection() {
@@ -78,7 +90,7 @@ export function ProjectsSection() {
                 </ScrollAnimation>
 
                 {/* Bento Box Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 auto-rows-[280px]">
                     {projects.map((project, index) => (
                         <TiltCard key={index} index={index} project={project} />
                     ))}
@@ -140,23 +152,23 @@ function TiltCard({ project, index }: { project: any; index: number }) {
                 {/* Inner Card */}
                 <div
                     style={{ transform: "translateZ(30px)", transformStyle: "preserve-3d" }}
-                    className="relative h-full rounded-[23px] bg-card/60 backdrop-blur-xl border border-border/40 p-8 flex flex-col overflow-hidden transition-colors duration-500 group-hover:bg-card/80 shadow-sm"
+                    className="relative h-full rounded-[23px] bg-card/60 backdrop-blur-xl border border-border/40 p-6 sm:p-8 flex flex-col overflow-hidden transition-colors duration-500 group-hover:bg-card/80 shadow-sm"
                 >
                     {/* Corner Accent */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                     <div style={{ transform: "translateZ(40px)" }} className="relative z-10">
                         {project.featured && (
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-4 rounded-md bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider border border-primary/20">
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mb-3 rounded-md bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider border border-primary/20">
                                 Featured Project
                             </div>
                         )}
-                        <h3 className="text-2xl lg:text-3xl font-bold font-heading mb-4 text-foreground/90 group-hover:text-primary transition-colors duration-300 tracking-tight">
+                        <h3 className="text-xl lg:text-3xl font-bold font-heading mb-3 text-foreground/90 group-hover:text-primary transition-colors duration-300 tracking-tight">
                             {project.title}
                         </h3>
                     </div>
 
-                    <p style={{ transform: "translateZ(20px)" }} className="text-muted-foreground/90 mb-6 font-light leading-relaxed max-w-xl">
+                    <p style={{ transform: "translateZ(20px)" }} className="text-sm sm:text-base text-muted-foreground/90 mb-4 font-light leading-relaxed max-w-xl line-clamp-3 lg:line-clamp-none">
                         {project.description}
                     </p>
 
@@ -171,18 +183,29 @@ function TiltCard({ project, index }: { project: any; index: number }) {
 
                     {/* Action Buttons */}
                     <div style={{ transform: "translateZ(50px)" }} className="absolute bottom-6 right-6 flex flex-col sm:flex-row gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        <Link href={project.github} className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
-                            <span className="relative z-10 flex items-center gap-2">
-                                <Github className="h-4 w-4" /> Code
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
-                        </Link>
-                        <Link href={project.demo} className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
-                            <span className="relative z-10 flex items-center gap-2">
-                                <ExternalLink className="h-4 w-4" /> Demo
-                            </span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
-                        </Link>
+                        {project.isGitHubProfile ? (
+                            <Link href={project.github} target="_blank" className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
+                                <span className="relative z-10 flex items-center gap-2">
+                                    <Github className="h-4 w-4" /> View Profile
+                                </span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
+                            </Link>
+                        ) : (
+                            <>
+                                <Link href={project.github} target="_blank" className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        <Github className="h-4 w-4" /> Code
+                                    </span>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
+                                </Link>
+                                <Link href={project.demo} target={project.demo === "#" ? "_self" : "_blank"} className="relative group/btn overflow-hidden rounded-full h-10 px-4 text-sm font-medium border border-border/40 bg-white/[0.02] backdrop-blur-md transition-all duration-300 hover:scale-[1.02] active:scale-95 text-foreground/80 hover:text-foreground flex items-center justify-center gap-2 hover:border-primary/50 hover:bg-white/[0.05] shadow-lg">
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        <ExternalLink className="h-4 w-4" /> Demo
+                                    </span>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 ease-in-out z-0" />
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </motion.div>
